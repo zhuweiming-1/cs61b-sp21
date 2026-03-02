@@ -64,7 +64,6 @@ public class Model extends Observable {
      * Return the current Tile at (COL, ROW), where 0 <= ROW < size(),
      * 0 <= COL < size(). Returns null if there is no tile there.
      * Used for testing. Should be deprecated and removed.
-     *
      */
     public Tile tile(int col, int row) {
         return board.tile(col, row);
@@ -136,7 +135,6 @@ public class Model extends Observable {
      * 3. When three adjacent tiles in the direction of motion have the same
      * value, then the leading two tiles in the direction of motion merge,
      * and the trailing tile does not.
-     *
      */
     public boolean tilt(Side side) {
         boolean changed;
@@ -159,6 +157,41 @@ public class Model extends Observable {
             setChanged();
         }
         return changed;
+    }
+
+    private class Result {
+        int nextTile = 0;// 推荐下一个可移动的位置
+        int score = 0;// 合并得到的分数
+        boolean changed = false;// 是否改变棋盘
+    }
+
+    /**
+     * 移动tile,并推荐(返回)下一个tile可以移动的位置。
+     *
+     * @param col
+     * @param row
+     * @param curr
+     * @return
+     */
+    public Result move(int col, int row, Tile curr) {
+        Result result = new Result();
+        if (board.tile(col, row) == null) {
+            boolean merged = board.move(col, row, curr);
+            result.nextTile = row;
+            result.changed = true;
+        } else if (board.tile(col, row).value() == curr.value()) {
+            boolean merged = board.move(col, row, curr);
+            result.score += board.tile(col, row).value();
+            result.nextTile = row + 1;
+            result.changed = true;
+        } else {
+            boolean merged = board.move(col, row + 1, curr);
+            result.nextTile = row + 1;
+            if (row + 1 > curr.row()) {
+                result.changed = true;
+            }
+        }
+        return result;
     }
 
     private int singleColumnTilt(int col, boolean[] changedArr) {
@@ -289,7 +322,6 @@ public class Model extends Observable {
     /**
      * Returns true if at least one space on the Board is empty.
      * Empty spaces are stored as null.
-     *
      */
     public static boolean emptySpaceExists(Board b) {
         int size = b.size();
