@@ -175,21 +175,20 @@ public class Model extends Observable {
     public Result move(int col, int row, Tile curr) {
         Result result = new Result();
         if (curr != null) {
-            if (board.tile(col, row) == null) {
+            if (board.tile(col, row) == null || board.tile(col, row).value() == curr.value()) {
                 boolean merged = board.move(col, row, curr);
                 result.nextTile = row;
                 result.changed = true;
-            } else if (board.tile(col, row).value() == curr.value()) {
-                boolean merged = board.move(col, row, curr);
-                result.score += board.tile(col, row).value();
-                result.nextTile = row - 1;
-                result.changed = true;
+                if (merged) {
+                    result.score += board.tile(col, row).value();
+                    result.nextTile = row - 1;
+                }
             } else {
-                boolean merged = board.move(col, row - 1, curr);
-                result.nextTile = row - 1;
-                if (board.tile(col, row - 1) != curr) {
+                if (board.tile(col, row - 1) == null) {
+                    board.move(col, row - 1, curr);
                     result.changed = true;
                 }
+                result.nextTile = row - 1;
             }
         } else {
             result.nextTile = row;
