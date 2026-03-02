@@ -140,16 +140,15 @@ public class Model extends Observable {
         boolean changed;
         changed = false;
         int size = board.size();
-        boolean[] changedArr = new boolean[size];
 
         // Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
         board.setViewingPerspective(side);
         for (int i = 0; i < size; i++) {
-            int colScore = singleColumnTilt(i, changedArr);
-            score += colScore;
-            changed = changed || changedArr[i];
+            Result result = singleColumnTilt(i);
+            score += result.score;
+            changed = changed || result.changed;
         }
         board.setViewingPerspective(Side.NORTH);
         checkGameOver();
@@ -159,7 +158,7 @@ public class Model extends Observable {
         return changed;
     }
 
-    private class Result {
+    public class Result {
         int nextTile = 0;// 推荐下一个可移动的位置
         int score = 0;// 合并得到的分数
         boolean changed = false;// 是否改变棋盘
@@ -175,21 +174,39 @@ public class Model extends Observable {
      */
     public Result move(int col, int row, Tile curr) {
         Result result = new Result();
-        if (board.tile(col, row) == null) {
-            boolean merged = board.move(col, row, curr);
-            result.nextTile = row;
-            result.changed = true;
-        } else if (board.tile(col, row).value() == curr.value()) {
-            boolean merged = board.move(col, row, curr);
-            result.score += board.tile(col, row).value();
-            result.nextTile = row + 1;
-            result.changed = true;
-        } else {
-            boolean merged = board.move(col, row + 1, curr);
-            result.nextTile = row + 1;
-            if (row + 1 > curr.row()) {
+        if (curr != null) {
+            if (board.tile(col, row) == null) {
+                boolean merged = board.move(col, row, curr);
+                result.nextTile = row;
                 result.changed = true;
+            } else if (board.tile(col, row).value() == curr.value()) {
+                boolean merged = board.move(col, row, curr);
+                result.score += board.tile(col, row).value();
+                result.nextTile = row - 1;
+                result.changed = true;
+            } else {
+                boolean merged = board.move(col, row - 1, curr);
+                result.nextTile = row - 1;
+                if (board.tile(col, row - 1) != curr) {
+                    result.changed = true;
+                }
             }
+        } else {
+            result.nextTile = row;
+        }
+        return result;
+    }
+
+    public Result singleColumnTilt(int col) {
+        Result result = new Result();
+        int size = board.size();
+        int targPos = size - 1;
+        for (int row = size - 2; row >= 0; row--) {
+            Tile curr = board.tile(col, row);
+            Result move = move(col, targPos, curr);
+            targPos = move.nextTile;
+            result.score += move.score;
+            result.changed = result.changed || move.changed;
         }
         return result;
     }

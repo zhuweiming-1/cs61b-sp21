@@ -1,4 +1,3 @@
-/*
 package game2048;
 
 import org.junit.Assert;
@@ -24,8 +23,8 @@ public class TestSingleColumnTilt extends TestUtils {
         boolean[] changedArr = new boolean[after.length];
         model = new Model(before, 0, 0, false);
         String prevBoard = model.toString();
-        int score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        Model.Result result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after, 0, 0, prevBoard, Side.NORTH);
     }
 
@@ -46,8 +45,8 @@ public class TestSingleColumnTilt extends TestUtils {
         boolean[] changedArr = new boolean[4];
         model = new Model(before1, 0, 0, false);
         String prevBoard1 = model.toString();
-        int score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        Model.Result result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after1, 0, 0, prevBoard1, Side.NORTH);
 
         int[][] before2 = new int[][]{
@@ -59,8 +58,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before2, 0, 0, false);
         String prevBoard2 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after1, 0, 0, prevBoard2, Side.NORTH);
 
         int[][] before3 = new int[][]{
@@ -73,8 +72,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before3, 0, 0, false);
         String prevBoard3 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after1, 0, 0, prevBoard3, Side.NORTH);
 
         int[][] before4 = new int[][]{
@@ -86,8 +85,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before4, 0, 0, false);
         String prevBoard4 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after1, 0, 0, prevBoard4, Side.NORTH);
     }
 
@@ -108,8 +107,8 @@ public class TestSingleColumnTilt extends TestUtils {
         boolean[] changedArr = new boolean[4];
         model = new Model(before1, 0, 0, false);
         String prevBoard1 = model.toString();
-        int score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        Model.Result result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after1, 0, 0, prevBoard1, Side.NORTH);
 
         int[][] before2 = new int[][]{
@@ -121,8 +120,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before2, 0, 0, false);
         String prevBoard2 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after1, 0, 0, prevBoard2, Side.NORTH);
 
         int[][] before3 = new int[][]{
@@ -135,8 +134,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before3, 0, 0, false);
         String prevBoard3 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after1, 0, 0, prevBoard3, Side.NORTH);
 
         int[][] before4 = new int[][]{
@@ -148,8 +147,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before4, 0, 0, false);
         String prevBoard4 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after1, 0, 0, prevBoard4, Side.NORTH);
 
         int[][] before5 = new int[][]{
@@ -161,8 +160,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before5, 0, 0, false);
         String prevBoard5 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after1, 0, 0, prevBoard5, Side.NORTH);
 
         int[][] before6 = new int[][]{
@@ -174,8 +173,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before6, 0, 0, false);
         String prevBoard6 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after1, 0, 0, prevBoard6, Side.NORTH);
     }
 
@@ -196,8 +195,8 @@ public class TestSingleColumnTilt extends TestUtils {
         boolean[] changedArr = new boolean[4];
         model = new Model(before1, 0, 0, false);
         String prevBoard1 = model.toString();
-        int score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        Model.Result result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after1, 0, 0, prevBoard1, Side.NORTH);
 
         int[][] before2 = new int[][]{
@@ -209,8 +208,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before2, 0, 0, false);
         String prevBoard2 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after1, 0, 0, prevBoard2, Side.NORTH);
 
         int[][] before3 = new int[][]{
@@ -223,8 +222,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before3, 0, 0, false);
         String prevBoard3 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after1, 0, 0, prevBoard3, Side.NORTH);
 
         int[][] before4 = new int[][]{
@@ -236,8 +235,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before4, 0, 0, false);
         String prevBoard4 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after1, 0, 0, prevBoard4, Side.NORTH);
 
         int[][] before5 = new int[][]{
@@ -249,8 +248,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before5, 0, 0, false);
         String prevBoard5 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after1, 0, 0, prevBoard5, Side.NORTH);
 
         int[][] before6 = new int[][]{
@@ -262,8 +261,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before6, 0, 0, false);
         String prevBoard6 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after1, 0, 0, prevBoard6, Side.NORTH);
     }
 
@@ -285,8 +284,8 @@ public class TestSingleColumnTilt extends TestUtils {
         boolean[] changedArr = new boolean[4];
         model = new Model(before1, 0, 0, false);
         String prevBoard1 = model.toString();
-        int score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        Model.Result result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after1, 0, 0, prevBoard1, Side.NORTH);
 
         int[][] before2 = new int[][]{
@@ -298,8 +297,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before2, 0, 0, false);
         String prevBoard2 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after1, 0, 0, prevBoard2, Side.NORTH);
 
         int[][] before3 = new int[][]{
@@ -312,8 +311,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before3, 0, 0, false);
         String prevBoard3 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after1, 0, 0, prevBoard3, Side.NORTH);
 
         int[][] before4 = new int[][]{
@@ -325,8 +324,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before4, 0, 0, false);
         String prevBoard4 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after1, 0, 0, prevBoard4, Side.NORTH);
     }
 
@@ -347,8 +346,8 @@ public class TestSingleColumnTilt extends TestUtils {
         boolean[] changedArr = new boolean[4];
         model = new Model(before1, 0, 0, false);
         String prevBoard1 = model.toString();
-        int score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        Model.Result result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after1, 0, 0, prevBoard1, Side.NORTH);
 
         int[][] before2 = new int[][]{
@@ -361,8 +360,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before2, 0, 0, false);
         String prevBoard2 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after1, 0, 0, prevBoard2, Side.NORTH);
 
         int[][] before3 = new int[][]{
@@ -375,8 +374,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before3, 0, 0, false);
         String prevBoard3 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after1, 0, 0, prevBoard3, Side.NORTH);
 
         int[][] before4 = new int[][]{
@@ -388,8 +387,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before4, 0, 0, false);
         String prevBoard4 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after1, 0, 0, prevBoard4, Side.NORTH);
 
 
@@ -408,8 +407,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before5, 0, 0, false);
         String prevBoard5 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after5, 0, 0, prevBoard5, Side.NORTH);
 
         int[][] before6 = new int[][]{
@@ -422,8 +421,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before6, 0, 0, false);
         String prevBoard6 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after5, 0, 0, prevBoard6, Side.NORTH);
 
         int[][] before7 = new int[][]{
@@ -436,8 +435,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before7, 0, 0, false);
         String prevBoard7 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after5, 0, 0, prevBoard7, Side.NORTH);
 
         int[][] before8 = new int[][]{
@@ -449,8 +448,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before8, 0, 0, false);
         String prevBoard8 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after5, 0, 0, prevBoard8, Side.NORTH);
 
 
@@ -469,8 +468,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before9, 0, 0, false);
         String prevBoard9 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after9, 0, 0, prevBoard9, Side.NORTH);
 
         int[][] before10 = new int[][]{
@@ -483,8 +482,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before10, 0, 0, false);
         String prevBoard10 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after9, 0, 0, prevBoard10, Side.NORTH);
 
         int[][] before11 = new int[][]{
@@ -497,8 +496,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before11, 0, 0, false);
         String prevBoard11 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after9, 0, 0, prevBoard11, Side.NORTH);
 
         int[][] before12 = new int[][]{
@@ -510,8 +509,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before12, 0, 0, false);
         String prevBoard12 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after9, 0, 0, prevBoard12, Side.NORTH);
     }
 
@@ -533,8 +532,8 @@ public class TestSingleColumnTilt extends TestUtils {
         boolean[] changedArr = new boolean[4];
         model = new Model(before1, 0, 0, false);
         String prevBoard1 = model.toString();
-        int score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        Model.Result result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after1, 0, 0, prevBoard1, Side.NORTH);
 
         int[][] before2 = new int[][]{
@@ -546,8 +545,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before2, 0, 0, false);
         String prevBoard2 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after1, 0, 0, prevBoard2, Side.NORTH);
 
         int[][] before3 = new int[][]{
@@ -560,8 +559,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before3, 0, 0, false);
         String prevBoard3 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after1, 0, 0, prevBoard3, Side.NORTH);
 
         int[][] before4 = new int[][]{
@@ -573,8 +572,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before4, 0, 0, false);
         String prevBoard4 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after1, 0, 0, prevBoard4, Side.NORTH);
     }
 
@@ -595,8 +594,8 @@ public class TestSingleColumnTilt extends TestUtils {
         boolean[] changedArr = new boolean[4];
         model = new Model(before1, 0, 0, false);
         String prevBoard1 = model.toString();
-        int score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(8, score);
+        Model.Result result = model.singleColumnTilt(0);
+        Assert.assertEquals(8, result.score);
         checkModel(after1, 0, 0, prevBoard1, Side.NORTH);
     }
 
@@ -617,8 +616,8 @@ public class TestSingleColumnTilt extends TestUtils {
         boolean[] changedArr = new boolean[4];
         model = new Model(before1, 0, 0, false);
         String prevBoard1 = model.toString();
-        int score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        Model.Result result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after1, 0, 0, prevBoard1, Side.NORTH);
     }
 
@@ -639,8 +638,8 @@ public class TestSingleColumnTilt extends TestUtils {
         boolean[] changedArr = new boolean[4];
         model = new Model(before1, 0, 0, false);
         String prevBoard1 = model.toString();
-        int score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        Model.Result result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after1, 0, 0, prevBoard1, Side.NORTH);
 
         int[][] before2 = new int[][]{
@@ -658,8 +657,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before2, 0, 0, false);
         String prevBoard2 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after2, 0, 0, prevBoard2, Side.NORTH);
 
         int[][] before3 = new int[][]{
@@ -677,8 +676,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before3, 0, 0, false);
         String prevBoard3 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after3, 0, 0, prevBoard3, Side.NORTH);
 
         int[][] before4 = new int[][]{
@@ -695,8 +694,8 @@ public class TestSingleColumnTilt extends TestUtils {
         };
         model = new Model(before4, 0, 0, false);
         String prevBoard4 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after4, 0, 0, prevBoard4, Side.NORTH);
 
         int[][] before5 = new int[][]{
@@ -713,8 +712,8 @@ public class TestSingleColumnTilt extends TestUtils {
         };
         model = new Model(before5, 0, 0, false);
         String prevBoard5 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(0, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(0, result.score);
         checkModel(after5, 0, 0, prevBoard5, Side.NORTH);
 
         int[][] before6 = new int[][]{
@@ -731,8 +730,8 @@ public class TestSingleColumnTilt extends TestUtils {
         };
         model = new Model(before6, 0, 0, false);
         String prevBoard6 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after6, 0, 0, prevBoard6, Side.NORTH);
     }
 
@@ -753,8 +752,8 @@ public class TestSingleColumnTilt extends TestUtils {
         boolean[] changedArr = new boolean[4];
         model = new Model(before1, 0, 0, false);
         String prevBoard1 = model.toString();
-        int score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        Model.Result result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after1, 0, 0, prevBoard1, Side.NORTH);
 
         int[][] before2 = new int[][]{
@@ -773,8 +772,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before2, 0, 0, false);
         String prevBoard2 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after2, 0, 0, prevBoard2, Side.NORTH);
 
         int[][] before3 = new int[][]{
@@ -792,8 +791,8 @@ public class TestSingleColumnTilt extends TestUtils {
 
         model = new Model(before3, 0, 0, false);
         String prevBoard3 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after3, 0, 0, prevBoard3, Side.NORTH);
 
         int[][] before4 = new int[][]{
@@ -810,11 +809,10 @@ public class TestSingleColumnTilt extends TestUtils {
         };
         model = new Model(before4, 0, 0, false);
         String prevBoard4 = model.toString();
-        score = model.singleColumnTilt(0, changedArr);
-        Assert.assertEquals(4, score);
+        result = model.singleColumnTilt(0);
+        Assert.assertEquals(4, result.score);
         checkModel(after4, 0, 0, prevBoard4, Side.NORTH);
     }
 
 
 }
-*/
