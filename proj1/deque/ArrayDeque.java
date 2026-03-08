@@ -18,9 +18,39 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public void addFirst(T item) {
+        autoResize();
         items[nextFirst] = item;
         nextFirst = correctIndexPosition(nextFirst - 1);
         size++;
+    }
+
+    private static final double THRESHOLD = 0.25;
+
+    public void autoResize() {
+        if (size == items.length) {
+            resize(size * 2);
+        } else {
+            int len = items.length;
+            double threshold = size * 1.0 / len;
+            if (len >= 16 && threshold < THRESHOLD) {
+                len = len / 2;
+                while (threshold < THRESHOLD && len >= 16) {
+                    len = len / 2;
+                    threshold = size * 1.0 / len;
+                }
+                resize(len);
+            }
+        }
+    }
+
+    public void resize(int len) {
+        T[] tmp = (T[]) new Object[len];
+        for (int i = 0; i < size; i++) {
+            tmp[i] = get(i);
+        }
+        items = tmp;
+        nextFirst = len - 1;
+        nextLast = size;
     }
 
     private int correctIndexPosition(int index) {
@@ -33,6 +63,7 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public void addLast(T item) {
+        autoResize();
         items[nextLast] = item;
         nextLast = correctIndexPosition(nextLast + 1);
         size++;
@@ -59,6 +90,7 @@ public class ArrayDeque<T> implements Deque<T> {
         if (size <= 0) {
             return null;
         }
+        autoResize();
         int next = correctIndexPosition(nextFirst + 1);
         T result = items[next];
         nextFirst = next;
@@ -71,6 +103,7 @@ public class ArrayDeque<T> implements Deque<T> {
         if (size <= 0) {
             return null;
         }
+        autoResize();
         int next = correctIndexPosition(nextLast - 1);
         T result = items[next];
         nextLast = next;

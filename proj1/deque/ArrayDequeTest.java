@@ -121,15 +121,15 @@ public class ArrayDequeTest {
 
 
         ArrayDeque<Integer> ad1 = new ArrayDeque<Integer>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 1000000; i++) {
             ad1.addLast(i);
         }
 
-        for (double i = 0; i < 4; i++) {
+        for (double i = 0; i < 500000; i++) {
             assertEquals("Should have the same value", i, (double) ad1.removeFirst(), 0.0);
         }
 
-        for (double i = 7; i > 4; i--) {
+        for (double i = 999999; i > 500000; i--) {
             assertEquals("Should have the same value", i, (double) ad1.removeLast(), 0.0);
         }
 
@@ -222,6 +222,13 @@ public class ArrayDequeTest {
         assertEquals(3, ad.size());
         assertEquals("1 2 3", ad.toString());
         ad.printDeque();
+    }
+
+
+    @Test
+    public void testResize(){
+
+
     }
 
 }
