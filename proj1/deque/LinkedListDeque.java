@@ -1,7 +1,6 @@
 package deque;
 
 import java.util.Iterator;
-import java.util.StringJoiner;
 
 public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 
