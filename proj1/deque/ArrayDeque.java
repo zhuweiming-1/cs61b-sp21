@@ -1,5 +1,6 @@
 package deque;
 
+import java.util.Iterator;
 import java.util.StringJoiner;
 
 public class ArrayDeque<T> implements Deque<T> {
@@ -18,29 +19,29 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public void addFirst(T item) {
-        autoResize();
+        if (size == items.length) {
+            resize(size * 2);
+        }
         items[nextFirst] = item;
         nextFirst = correctIndexPosition(nextFirst - 1);
         size++;
     }
 
     private static final double THRESHOLD = 0.25;
+    private static final int LEN_THRESHOLD = 16;
 
     public void autoResize() {
-        if (size == items.length) {
-            resize(size * 2);
-        } else {
-            int len = items.length;
-            double threshold = size * 1.0 / len;
-            if (len >= 16 && threshold < THRESHOLD) {
+        int len = items.length;
+        double threshold = size * 1.0 / len;
+        if (len >= LEN_THRESHOLD && threshold < THRESHOLD) {
+            len = len / 2;
+            while (threshold < THRESHOLD && len >= LEN_THRESHOLD) {
                 len = len / 2;
-                while (threshold < THRESHOLD && len >= 16) {
-                    len = len / 2;
-                    threshold = size * 1.0 / len;
-                }
-                resize(len);
+                threshold = size * 1.0 / len;
             }
+            resize(len);
         }
+
     }
 
     public void resize(int len) {
@@ -63,16 +64,14 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public void addLast(T item) {
-        autoResize();
+        if (size == items.length) {
+            resize(size * 2);
+        }
         items[nextLast] = item;
         nextLast = correctIndexPosition(nextLast + 1);
         size++;
     }
 
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
 
     @Override
     public int size() {
@@ -90,11 +89,12 @@ public class ArrayDeque<T> implements Deque<T> {
         if (size <= 0) {
             return null;
         }
-        autoResize();
         int next = correctIndexPosition(nextFirst + 1);
         T result = items[next];
+        items[next] = null;
         nextFirst = next;
         size--;
+        autoResize();
         return result;
     }
 
@@ -103,11 +103,12 @@ public class ArrayDeque<T> implements Deque<T> {
         if (size <= 0) {
             return null;
         }
-        autoResize();
         int next = correctIndexPosition(nextLast - 1);
         T result = items[next];
+        items[next] = null;
         nextLast = next;
         size--;
+        autoResize();
         return result;
     }
 
@@ -126,5 +127,28 @@ public class ArrayDeque<T> implements Deque<T> {
             sj.add(items[correctIndexPosition(nextFirst + 1 + i)].toString());
         }
         return sj.toString();
+    }
+
+
+    public Iterator<T> iterator() {
+        return new ArrayQueryIterator();
+    }
+
+    public class ArrayQueryIterator implements Iterator<T> {
+        int curr = correctIndexPosition(nextFirst + 1);
+        int c = 0;
+
+        @Override
+        public boolean hasNext() {
+            return c < size;
+        }
+
+        @Override
+        public T next() {
+            T result = items[curr];
+            curr = correctIndexPosition(curr + 1);
+            c++;
+            return result;
+        }
     }
 }

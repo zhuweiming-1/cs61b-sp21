@@ -1,7 +1,11 @@
 package deque;
 
 
+import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 import static org.junit.Assert.*;
 
@@ -224,11 +228,45 @@ public class ArrayDequeTest {
         ad.printDeque();
     }
 
+    @Test
+    public void randomizedTest() {
+        java.util.ArrayDeque<Integer> correct = new java.util.ArrayDeque<>();
+        ArrayDeque<Integer> target = new ArrayDeque<>();
+        int N = 500000;
+        for (int i = 0; i < N; i += 1) {
+            int operationNumber = StdRandom.uniform(0, 5);
+            if (operationNumber == 0) {
+                // addLast
+                int randVal = StdRandom.uniform(0, 1000);
+                correct.addLast(randVal);
+                target.addLast(randVal);
+            } else if (operationNumber == 1) {
+                int randVal = StdRandom.uniform(0, 100);
+                correct.addFirst(randVal);
+                target.addFirst(randVal);
+            } else if (operationNumber == 2) {
+                assertEquals(correct.size(), target.size());
+            } else if (operationNumber == 3) {
+                if (!correct.isEmpty()) {
+                    assertEquals(correct.removeFirst(), target.removeFirst());
+                }
+            } else if (operationNumber == 4) {
+                if (!correct.isEmpty()) {
+                    assertEquals(correct.removeLast(), target.removeLast());
+                }
+            }
+        }
+    }
 
     @Test
-    public void testResize(){
-
-
+    public void testArrayDeque() {
+        ArrayDeque<Integer> ad1 = new ArrayDeque<Integer>();
+        for (int i = 0; i < 32; i++) {
+            ad1.addLast(i);
+        }
+        for (int i = 0; i < 32; i++) {
+            ad1.removeFirst();
+        }
     }
 
 }

@@ -20,7 +20,9 @@ public interface Deque<T> {
      *
      * @return
      */
-    boolean isEmpty();
+    default boolean isEmpty() {
+        return size() == 0;
+    }
 
     /**
      * 返回双端队列中元素的数量。

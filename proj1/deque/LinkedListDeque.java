@@ -1,15 +1,17 @@
 package deque;
 
+import java.util.Iterator;
 import java.util.StringJoiner;
 
 public class LinkedListDeque<T> implements Deque<T> {
+
 
     private class Node {
         Node pre;
         T value;
         Node next;
 
-        public Node(Node pre, T value, Node next) {
+        Node(Node pre, T value, Node next) {
             this.pre = pre;
             this.value = value;
             this.next = next;
@@ -43,11 +45,6 @@ public class LinkedListDeque<T> implements Deque<T> {
         sentinel.pre = node;
         pre.next = node;
         size++;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
     }
 
     @Override
@@ -126,4 +123,25 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
         return sj.toString();
     }
+
+    public Iterator<T> iterator() {
+        return null;
+    }
+
+    public class LinkedListDequeIterator implements Iterator<T> {
+        Node curr = sentinel.next;
+
+        @Override
+        public boolean hasNext() {
+            return curr != sentinel;
+        }
+
+        @Override
+        public T next() {
+            T result = curr.value;
+            curr = curr.next;
+            return result;
+        }
+    }
+
 }

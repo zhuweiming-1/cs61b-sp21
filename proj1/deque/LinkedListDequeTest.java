@@ -1,7 +1,11 @@
 package deque;
 
 
+import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
+
+import java.util.LinkedList;
+
 
 import static org.junit.Assert.*;
 
@@ -243,4 +247,46 @@ public class LinkedListDequeTest {
         assertEquals("1 2 3", lld.toString());
         lld.printDeque();
     }
+
+    @Test
+    public void randomizedTest() {
+        LinkedList<Integer> correct = new LinkedList<>();
+        LinkedListDeque<Integer> target = new LinkedListDeque<>();
+        int N = 500000;
+        for (int i = 0; i < N; i += 1) {
+            int operationNumber = StdRandom.uniform(0, 6);
+            if (operationNumber == 0) {
+                // addLast
+                int randVal = StdRandom.uniform(0, 1000);
+                correct.addLast(randVal);
+                target.addLast(randVal);
+            } else if (operationNumber == 1) {
+                int randVal = StdRandom.uniform(0, 100);
+                correct.addFirst(randVal);
+                target.addFirst(randVal);
+            } else if (operationNumber == 2) {
+                assertEquals(correct.size(), target.size());
+            } else if (operationNumber == 3) {
+                if (!correct.isEmpty()) {
+                    assertEquals(correct.removeFirst(), target.removeFirst());
+                }
+            } else if (operationNumber == 4) {
+                if (!correct.isEmpty()) {
+                    assertEquals(correct.removeLast(), target.removeLast());
+                }
+            } else if (operationNumber == 5) {
+                if (!correct.isEmpty()) {
+                    int index = StdRandom.uniform(0, correct.size());
+                    assertEquals(correct.get(index), target.get(index));
+                }
+            }
+        }
+
+    }
+
+    @Test
+    public void testIterator() {
+
+    }
+
 }
