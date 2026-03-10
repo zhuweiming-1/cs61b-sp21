@@ -30,7 +30,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     private static final double THRESHOLD = 0.25;
     private static final int LEN_THRESHOLD = 16;
 
-    public void autoResize() {
+    private void autoResize() {
         int len = items.length;
         double threshold = size * 1.0 / len;
         if (len >= LEN_THRESHOLD && threshold < THRESHOLD) {
@@ -44,7 +44,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     }
 
-    public void resize(int len) {
+    private void resize(int len) {
         T[] tmp = (T[]) new Object[len];
         for (int i = 0; i < size; i++) {
             tmp[i] = get(i);
@@ -120,14 +120,14 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         return items[correctIndexPosition(nextFirst + 1 + index)];
     }
 
-    @Override
+/*    @Override
     public String toString() {
         StringJoiner sj = new StringJoiner(" ");
         for (int i = 0; i < size; i++) {
             sj.add(items[correctIndexPosition(nextFirst + 1 + i)].toString());
         }
         return sj.toString();
-    }
+    }*/
 
     @Override
     public boolean equals(Object obj) {

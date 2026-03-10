@@ -112,7 +112,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         return getRecursiveHelp(curr.next, index - 1);
     }
 
-    @Override
+/*    @Override
     public String toString() {
         Node curr = sentinel.next;
         StringJoiner sj = new StringJoiner(" ");
@@ -122,7 +122,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
             curr = curr.next;
         }
         return sj.toString();
-    }
+    }*/
 
     @Override
     public boolean equals(Object obj) {
