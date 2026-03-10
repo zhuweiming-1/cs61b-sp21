@@ -3,7 +3,7 @@ package deque;
 import java.util.Iterator;
 import java.util.StringJoiner;
 
-public class ArrayDeque<T> implements Deque<T> {
+public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     private T[] items;
     private int size;
@@ -129,7 +129,27 @@ public class ArrayDeque<T> implements Deque<T> {
         return sj.toString();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj instanceof Deque) {
+            Deque d = (Deque) obj;
+            if (d.size() != size) {
+                return false;
+            }
+            for (int i = 0; i < size; i++) {
+                if (!d.get(i).equals(get(i))) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 
+    @Override
     public Iterator<T> iterator() {
         return new ArrayQueryIterator();
     }
