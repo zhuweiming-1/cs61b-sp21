@@ -2,8 +2,6 @@ package cn.zhu;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.hive.ql.exec.vector.BytesColumnVector;
-import org.apache.hadoop.hive.ql.exec.vector.LongColumnVector;
 import org.apache.hadoop.hive.ql.exec.vector.TimestampColumnVector;
 import org.apache.hadoop.hive.ql.exec.vector.VectorizedRowBatch;
 import org.apache.orc.OrcFile;
@@ -12,7 +10,6 @@ import org.apache.orc.RecordReader;
 import org.apache.orc.TypeDescription;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 /**
  * ORC文件读取示例
@@ -23,7 +20,7 @@ public class OrcReadDemo {
         String inputPath = "./data/dn_6007_6008_0_4852bcdb-e32a-4b4c-b3f1-def9fb2bcec9_1.orc";
 
         Configuration conf = new Configuration();
-        conf.set("useUTCTimestamp","true");
+        conf.set("useUTCTimestamp", "true");
         conf.set("fs.defaultFS", "file:///");
 
         try {
@@ -34,17 +31,18 @@ public class OrcReadDemo {
     }
 
     public static void readOrcFile(Configuration conf, String inputPath) throws IOException {
+        OrcFile.ReaderOptions readerOptions = OrcFile.readerOptions(conf);
+        readerOptions.useUTCTimestamp(true);
         // 1. 创建Reader
         Reader reader = OrcFile.createReader(
                 new Path(inputPath),
-                OrcFile.readerOptions(conf)
+                readerOptions
         );
 
         // 2. 获取文件信息
         System.out.println("ORC文件信息:");
         System.out.println("  行数: " + reader.getNumberOfRows());
         System.out.println("  schema: " + reader.getSchema());
-//        System.out.println("  压缩方式: " + reader.getCompression());
         System.out.println("  条带数: " + reader.getStripes().size());
 
         // 3. 创建RecordReader
@@ -54,7 +52,6 @@ public class OrcReadDemo {
             VectorizedRowBatch batch = schema.createRowBatch();
 
             System.out.println("\n读取数据内容:");
-            System.out.println("ID\tName\t\tAge\tSalary");
             System.out.println("----------------------------------------");
 
             // 5. 逐批读取数据
@@ -71,7 +68,7 @@ public class OrcReadDemo {
 
                     System.out.println(timestampUTC);
                     System.out.println(n);
-                    System.out.println(t.asScratchTimestamp(0));
+                    System.out.println(t.asScratchTimestamp(0).toString());
                     totalRows++;
                 }
                 batch.reset();
