@@ -297,10 +297,12 @@ public class Bst<Key extends Comparable<Key>, Value> {
         if (key == null) {
             throw new IllegalArgumentException();
         }
+
         Node node = floor(root, key);
         if (node == null) {
             throw new NoSuchElementException();
         }
+
         return node.key;
     }
 
@@ -313,11 +315,13 @@ public class Bst<Key extends Comparable<Key>, Value> {
             return node;
         }
         if (com < 0) {
-            Node leftNode = floor(node.left, key);
             return floor(node.left, key);
-        } else {
-            return floor(node.right, key);
         }
+        Node node2 = floor(node.right, key);
+        if (node2 == null) {
+            return node;
+        }
+        return node2;
     }
 
 
@@ -335,7 +339,32 @@ public class Bst<Key extends Comparable<Key>, Value> {
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
     public Key ceiling(Key key) {
-        return null;
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
+        Node node = ceiling(root, key);
+        if (node == null) {
+            throw new NoSuchElementException();
+        }
+        return node.key;
+    }
+
+    private Node ceiling(Node node, Key key) {
+        if (node == null) {
+            return null;
+        }
+        int com = key.compareTo(node.key);
+        if (com == 0) {
+            return node;
+        }
+        if (com > 0) {
+            return ceiling(node.right, key);
+        }
+        Node ceiling = ceiling(node.left, key);
+        if (ceiling == null) {
+            return node;
+        }
+        return ceiling;
     }
 
 
