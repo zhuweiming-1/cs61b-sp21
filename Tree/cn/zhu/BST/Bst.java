@@ -1,6 +1,6 @@
 package cn.zhu.BST;
 
-import java.util.NoSuchElementException;
+import java.util.*;
 
 
 public class Bst<Key extends Comparable<Key>, Value> {
@@ -380,7 +380,24 @@ public class Bst<Key extends Comparable<Key>, Value> {
      *                                  <em>n</em>–1
      */
     public Key select(int rank) {
-        return null;
+        if (rank < 0 || rank > size() - 1) {
+            throw new IllegalArgumentException();
+        }
+        return select(root, rank).key;
+    }
+
+    private Node select(Node node, int rank) {
+        if (node == null) {
+            return null;
+        }
+        int t = size(node.left);
+        if (rank < t) {
+            return select(node.left, rank);
+        } else if (rank > t) {
+            return select(node.right, rank - t - 1);
+        } else {
+            return node;
+        }
     }
 
     // Return key in BST rooted at x of given rank.
@@ -395,7 +412,24 @@ public class Bst<Key extends Comparable<Key>, Value> {
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
     public int rank(Key key) {
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
         return 0;
+    }
+
+    private int rank(Node node, Key key) {
+        if (node == null) {
+            return 0;
+        }
+        int com = key.compareTo(node.key);
+        if (com == 0) {
+            return size(node.left);
+        } else if (com < 0) {
+            return rank(node.left, key);
+        } else {
+            return rank(node.right, key) + size(node.left) + 1;
+        }
     }
 
 
@@ -408,7 +442,11 @@ public class Bst<Key extends Comparable<Key>, Value> {
      * @return all keys in the symbol table in ascending order
      */
     public Iterable<Key> keys() {
-        return null;
+        List<Key> iterable = new LinkedList<>();
+        for (int com = 0; com < size(); com++) {
+            iterable.add(select(com));
+        }
+        return iterable;
     }
 
     /**
@@ -423,7 +461,13 @@ public class Bst<Key extends Comparable<Key>, Value> {
      *                                  is {@code null}
      */
     public Iterable<Key> keys(Key lo, Key hi) {
-        return null;
+        List<Key> iterable = new LinkedList<>();
+        int loRank = rank(lo);
+        int hiRank = rank(hi);
+        for (int com = loRank; com < hiRank; com++) {
+            iterable.add(select(com));
+        }
+        return iterable;
     }
 
 
@@ -438,7 +482,10 @@ public class Bst<Key extends Comparable<Key>, Value> {
      *                                  is {@code null}
      */
     public int size(Key lo, Key hi) {
-        return 0;
+        if (lo == null || hi == null) {
+            throw new IllegalArgumentException();
+        }
+        return rank(hi) - rank(lo) + 1;
     }
 
     /**
@@ -447,7 +494,14 @@ public class Bst<Key extends Comparable<Key>, Value> {
      * @return the height of the BST (a 1-node tree has height 0)
      */
     public int height() {
-        return 0;
+        return height(root);
+    }
+
+    private int height(Node node) {
+        if (node == null) {
+            return -1;
+        }
+        return Math.max(height(node.left), height(node.right)) + 1;
     }
 
 
@@ -457,7 +511,22 @@ public class Bst<Key extends Comparable<Key>, Value> {
      * @return the keys in the BST in level order traversal
      */
     public Iterable<Key> levelOrder() {
-        return null;
+        List<Key> iterable = new LinkedList<>();
+        Queue<Node> queue = new LinkedList<>();
+        if (root != null) {
+            queue.add(root);
+        }
+        while (!queue.isEmpty()) {
+            Node remove = queue.remove();
+            iterable.add(remove.key);
+            if (remove.left != null) {
+                queue.add(remove.left);
+            }
+            if (remove.right != null) {
+                queue.add(remove.right);
+            }
+        }
+        return iterable;
     }
 
 
