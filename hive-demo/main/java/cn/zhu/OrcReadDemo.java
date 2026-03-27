@@ -10,7 +10,6 @@ import org.apache.orc.RecordReader;
 import org.apache.orc.TypeDescription;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 
 /**
  * ORC文件读取示例
@@ -63,13 +62,12 @@ public class OrcReadDemo {
                     TimestampColumnVector t = (TimestampColumnVector) batch.cols[0];
 //                    t.setIsUTC(true);
                     long timestampUTC = t.getTime(0);
+                    int n = t.getNanos(0);
 
 
                     System.out.println(timestampUTC);
+                    System.out.println(n);
                     System.out.println(t.asScratchTimestamp(0).toString());
-
-                    System.out.println(new Timestamp(timestampUTC));
-
                     totalRows++;
                 }
                 batch.reset();
